@@ -2,30 +2,37 @@ import curses
 import math
 from curses import wrapper
 
-array = [	'its a house',	
+def drawArray(y, x, window, array):
+	for i in array:
+		window.addstr(y, x, i)
+		y = y + 1
+	
+def mapControl(window):
+	#Define map objects
+	array = [	'its a house',	
 					'###############',
 					'#             #',
 					'#             #',
 					'#             #',
 					'#             #',
 					'####### #######', ]
-def mapControl(window, array):
-	x = 2
-	y = 2
-	for i in array:
-		window.addstr(y, x, i)
-		y = y + 1	
-		
-	
+
+
+	#Set player spawn point	
 	playerX = 4
 	playerY = 4
 		
+	#Set Curses settings
 	curses.noecho()
 	curses.cbreak()
 	curses.curs_set(False)  
 	curses.use_default_colors()
 	window.keypad(True)
 
+	#Draw map objects
+	drawArray(2, 2, window, array)		
+	
+	#player movement	
 	while True:
 		keypress = window.getch()
 		try:
@@ -59,12 +66,17 @@ def mapControl(window, array):
 					pass
 		except(curses.error, ValueError):
 			pass
+
 def main(masterWindow):
+	#Setup screens
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
 	mapWindow = curses.newwin(int(math.ceil(maxHeight / 2)) , int(math.ceil(maxWidth)), 0, 0)
+	
+	#Main while loop
 	while True:
 		mapWindow.box()  
 		mapWindow.refresh()
-		mapControl(mapWindow, array)
+		mapControl(mapWindow)
+
 wrapper(main)
