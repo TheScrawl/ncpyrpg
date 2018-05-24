@@ -9,13 +9,13 @@ def drawArray(y, x, window, array):
 	
 def mapControl(window):
 	#Define map objects
-	array = [	'its a house',	
-					'###############',
-					'#             #',
-					'#             #',
-					'#             #',
-					'#             #',
-					'####### #######', ]
+	array = ['its a house',	
+			'###############',
+			'#             #',
+			'#             #',
+			'#             #',
+			'#             #',
+			'####### #######', ]
 
 
 	#Set player spawn point	
@@ -67,15 +67,30 @@ def mapControl(window):
 		except(curses.error, ValueError):
 			pass
 
+def menuControl(window):
+
+	#Set Curses settings
+	curses.noecho()
+	curses.cbreak()
+	curses.curs_set(False)  
+	curses.use_default_colors()
+	window.keypad(True)
+
+	#TODO: base menu system to build upon
+
 def main(masterWindow):
 	#Setup screens
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
 	mapWindow = curses.newwin(int(math.ceil(maxHeight / 2)) , int(math.ceil(maxWidth)), 0, 0)
+	menuWindow = curses.newwin(int(math.ceil(maxHeight / 2)), int(math.ceil(maxWidth)), int(math.ceil(maxHeight / 2)), 0)	
 	
+
 	#Main while loop
 	while True:
-		mapWindow.box()  
+		mapWindow.box()
+		menuWindow.box()
+		menuWindow.refresh()
 		mapWindow.refresh()
 		mapControl(mapWindow)
 
