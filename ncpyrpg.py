@@ -9,13 +9,15 @@ def drawArray(y, x, window, array):
 	
 def mapControl(window):
 	#Define map objects
-	array = ['its a house',	
-			'###############',
-			'#             #',
-			'#             #',
-			'#             #',
-			'#             #',
-			'####### #######', ]
+	house = [
+		'its a house',
+		'###############',
+		'#             #',
+		'#             #',
+		'#             #',
+		'#             #',
+		'####### #######', 
+	]
 
 
 	#Set player spawn point	
@@ -30,7 +32,7 @@ def mapControl(window):
 	window.keypad(True)
 
 	#Draw map objects
-	drawArray(2, 2, window, array)		
+	drawArray(2, 2, window, house)		
 	
 	#player movement	
 	while True:
@@ -79,12 +81,20 @@ def menuControl(window):
 	#TODO: base menu system to build upon
 
 def main(masterWindow):
+
 	#Setup screens
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
-	mapWindow = curses.newwin(int(math.ceil(maxHeight / 2)) , int(math.ceil(maxWidth)), 0, 0)
-	menuWindow = curses.newwin(int(math.ceil(maxHeight / 2)), int(math.ceil(maxWidth)), int(math.ceil(maxHeight / 2)), 0)	
-	
+	mapWindow = curses.newwin(
+		int(math.ceil(maxHeight / 2)), #Line count 
+		int(math.ceil(maxWidth)), #Column Count
+		0, #Start Y 
+		0) #Start X
+	menuWindow = curses.newwin(
+		int(math.ceil(maxHeight / 2)), #Line Count
+		int(math.ceil(maxWidth)), #Column Count
+		int(math.ceil(maxHeight / 2)), #Start Y
+		0) #Start X	
 
 	#Main while loop
 	while True:
