@@ -1,7 +1,7 @@
 # ncpyrpg
 What will eventually, hopefully, be an ncurses python-based top down old school rpg engine for easy and fast rpg game development
 
-We will see how far I actually get last time. 
+We will see how far I actually get this time. 
 
 ## What does it do so far?
 Newest to oldest changes
@@ -11,7 +11,6 @@ Newest to oldest changes
 
 ## Todos
 * Sort out how im going to do the menu system (probably some sort of tab system)
-* ~~Move things to a more "Engine-like" system that has more easily editable and expandable options for game creators.~~
 * Add maps/rooms that link up
 * Inventory system
 * Stats system
@@ -26,7 +25,7 @@ Newest to oldest changes
    * So far have a sort of button thing working, though it could theoretically do more
    * its a bit hacky, might redo once I figure out a better way of doing it
    * probably needs optimizing and whatnot
-  
+
 ## Known issues (i.e cant be bothered trying to fix please dont ask)
 * Lenny face ascii art doesnt work due to how the characters are handled. Not sure how to fix
 * Many emoji do not work, due to being more than one character large
