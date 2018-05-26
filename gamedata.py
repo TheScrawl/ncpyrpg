@@ -1,4 +1,4 @@
-# Engine functions and variables - do not touch
+## ENGINE FUNCTIONS AND VARIABLES - do not touch
 mapObjList = []
 
 def drawArray(y, x, window, array): 
@@ -15,13 +15,11 @@ class mapObj(object):
 		self.pos = (self.posY, self.posX)
 		self.function = function
 		mapObjList.append(self)	
-# Game Variables
-
+## GAME VARIABLES
 playerY, playerX, = 4, 4 #Spawn Point
 
-# Game Map Arrays and Objects
-
-
+## GAME MAP ARRAYS AND OBJECTS
+# Arrays
 house = [
 	'##########',
 	'#        #',
@@ -32,9 +30,10 @@ house = [
 	' ',
 	'hint: x is a button'
 	]
+# Objects (char, y, x, function)
+button = mapObj(['x'], 6, 6, 'window.addch(7, 6, " ")')
 
-# User map
+## USER MAP
 def drawmap(window):
 	drawArray(2, 3, window, house)
-	button = mapObj(['x'], 6, 6, 'window.addch(7, 6, " ")')
 	drawArray(button.posY, button.posX, window, button.char)
