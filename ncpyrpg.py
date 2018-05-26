@@ -1,29 +1,10 @@
 import curses
 import math
+import gamedata
 from curses import wrapper
 
-def drawArray(y, x, window, array):
-	for i in array:
-		window.addstr(y, x, i)
-		y = y + 1
-	
 def mapControl(window):
-	#Define map objects
-	house = [
-		'its a house',
-		'###############',
-		'#             #',
-		'#             #',
-		'#             #',
-		'#             #',
-		'####### #######', 
-	]
-
-
-	#Set player spawn point	
-	playerX = 4
-	playerY = 4
-		
+	
 	#Set Curses settings
 	curses.noecho()
 	curses.cbreak()
@@ -31,9 +12,12 @@ def mapControl(window):
 	curses.use_default_colors()
 	window.keypad(True)
 
+	playerY = gamedata.playerY
+	playerX = gamedata.playerX
+
 	#Draw map objects
-	drawArray(2, 2, window, house)		
-	
+	gamedata.drawmap(window)	
+
 	#player movement	
 	while True:
 		keypress = window.getch()
