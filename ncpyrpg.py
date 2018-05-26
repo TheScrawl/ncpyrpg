@@ -27,6 +27,12 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY - 1, playerX, u'o')
 					playerY = playerY - 1
+				for i in gamedata.mapObjList:
+					if i.pos == (playerY - 1, playerX):
+						window.addch(playerY, playerX, ' ')
+						window.addstr(playerY - 1, playerX, 'o')
+						playerY = playerY - 1
+						eval(i.function)
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -34,6 +40,12 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY + 1, playerX, u'o')
 					playerY = playerY + 1 
+				for i in gamedata.mapObjList:
+					if i.pos == (playerY + 1, playerX):
+						window.addch(playerY, playerX, ' ')
+						window.addstr(playerY + 1, playerX, 'o')
+						playerY = playerY + 1
+						eval(i.function)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -41,6 +53,12 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX - 1, u'o')
 					playerX = playerX - 1     
+				for i in gamedata.mapObjList:
+					if i.pos == (playerY, playerX - 1):
+						window.addch(playerY, playerX, ' ')
+						window.addstr(playerY, playerX - 1, 'o')
+						playerX = playerX - 1
+						eval(i.function)
 				else:
 					pass
 			if keypress == ord('d'):
@@ -48,6 +66,12 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX + 1, u'o') 
 					playerX = playerX + 1   
+				for i in gamedata.mapObjList:
+					if i.pos == (playerY, playerX + 1):
+						window.addch(playerY, playerX, ' ')
+						window.addstr(playerY, playerX + 1, 'o')
+						playerX = playerX + 1
+						eval(i.function)	
 				else:
 					pass
 		except(curses.error, ValueError):
