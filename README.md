@@ -4,6 +4,7 @@ What will eventually, hopefully, be an ncurses python-based top down old school 
 We will see how far I actually get last time. 
 
 ## What does it do so far?
+Newest to oldest changes
 * lets a game designer to generate a game map in gamedata.py
 * takes arrays and draws objects at given coordinates
 * allows a player to move while colliding with objects that they shouldnt be able to move through
