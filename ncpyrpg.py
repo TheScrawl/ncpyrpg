@@ -1,8 +1,28 @@
 import curses
 import math
-import gamedata
+import dill as pickle
 from curses import wrapper
 
+class mapObj(object):
+  global mapObjList
+  def __init__(self, char, posY, posX, function):
+    self.char = char
+    self.posY = posY
+    self.posX = posX
+    self.pos = (self.posY, self.posX)
+    self.function = function
+    mapObjList.append(self)
+
+def drawArray(y, x, window, array): 
+  for i in array: 
+    window.addstr(y, x, i) 
+    y = y + 1 
+
+def loadGame(file):
+	with open(file, 'rb') as f:
+		varDict = pickle.load(f)
+		locals().update(varDict)	
+			
 def mapControl(window):
 	
 	#Set Curses settings
@@ -77,19 +97,7 @@ def mapControl(window):
 		except(curses.error, ValueError):
 			pass
 
-def menuControl(window):
-
-	#Set Curses settings
-	curses.noecho()
-	curses.cbreak()
-	curses.curs_set(False)  
-	curses.use_default_colors()
-	window.keypad(True)
-
-	#TODO: base menu system to build upon
-
 def main(masterWindow):
-
 	#Setup screens
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
