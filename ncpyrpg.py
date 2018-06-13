@@ -15,16 +15,26 @@ class mapObj(object):
 
 def drawArray(y, x, window, array): 
   for i in array: 
-    window.addstr(y, x, i) 
-    y = y + 1 
+   window.addstr(y, x, i) 
+   y = y + 1 
 
-def loadGame(file):
-	with open(file, 'rb') as f:
+drawmap = None
+playerX = None
+playerY = None
+
+def loadGame():
+	global drawmap
+	global playerX
+	global playerY
+	with open('gamefile', 'rb') as f:
 		varDict = pickle.load(f)
-		locals().update(varDict)	
+		globals().update(varDict)
+	with open('functionfile', 'rb') as f:
+		drawmap = pickle.load(f)	
 			
 def mapControl(window):
-	
+	global playerX
+	global playerY	
 	#Set Curses settings
 	curses.noecho()
 	curses.cbreak()
@@ -32,11 +42,8 @@ def mapControl(window):
 	curses.use_default_colors()
 	window.keypad(True)
 
-	playerY = gamedata.playerY
-	playerX = gamedata.playerX
-
 	#Draw map objects
-	gamedata.drawmap(window)	
+	drawmap(window)	
 
 	#player movement	
 	while True:
@@ -47,7 +54,7 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY - 1, playerX, u'o')
 					playerY = playerY - 1
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY - 1, playerX):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY - 1, playerX, 'o')
@@ -60,7 +67,7 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY + 1, playerX, u'o')
 					playerY = playerY + 1 
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY + 1, playerX):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY + 1, playerX, 'o')
@@ -73,7 +80,7 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX - 1, u'o')
 					playerX = playerX - 1     
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY, playerX - 1):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX - 1, 'o')
@@ -86,7 +93,7 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX + 1, u'o') 
 					playerX = playerX + 1   
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY, playerX + 1):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX + 1, 'o')
@@ -99,6 +106,7 @@ def mapControl(window):
 
 def main(masterWindow):
 	#Setup screens
+	loadGame()
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
 	mapWindow = curses.newwin(

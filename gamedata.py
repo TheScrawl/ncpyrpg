@@ -1,5 +1,7 @@
 import dill as pickle
 
+mapObjList = []
+
 def drawArray(y, x, window, array):
 	for i in array:
 		window.addstr(y, x, i)
@@ -40,11 +42,11 @@ def drawmap(window):
 	drawArray(2, 3, window, house)
 	drawArray(button.posY, button.posX, window, button.char)
 
-varList = ['playerY', 'playerX', 'house', 'button', 'drawmap']
+varList = ['mapObjList', 'playerY', 'playerX', 'house', 'button']
 
-varDict = dict(name,eval(name)) for name in varList)
+varDict = dict([i, eval(i)] for i in varList)
 
+drawmapvar = drawmap
 if __name__ == '__main__':
-	with gamefile = open('gamefile', 'w') as f:
-		pickle.dump(varDict, f)
-	
+	pickle.dump(varDict, open('gamefile', 'wb'))
+	pickle.dump(drawmapvar, open('functionfile', 'wb'))
