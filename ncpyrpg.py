@@ -1,10 +1,40 @@
 import curses
 import math
-import gamedata
+import dill as pickle
 from curses import wrapper
 
+class mapObj(object):
+  global mapObjList
+  def __init__(self, char, posY, posX, function):
+    self.char = char
+    self.posY = posY
+    self.posX = posX
+    self.pos = (self.posY, self.posX)
+    self.function = function
+    mapObjList.append(self)
+
+def drawArray(y, x, window, array): 
+  for i in array: 
+   window.addstr(y, x, i) 
+   y = y + 1 
+
+drawmap = None
+playerX = None
+playerY = None
+
+def loadGame():
+	global drawmap
+	global playerX
+	global playerY
+	with open('gamefile', 'rb') as f:
+		varDict = pickle.load(f)
+		globals().update(varDict)
+	with open('functionfile', 'rb') as f:
+		drawmap = pickle.load(f)	
+			
 def mapControl(window):
-	
+	global playerX
+	global playerY	
 	#Set Curses settings
 	curses.noecho()
 	curses.cbreak()
@@ -12,11 +42,8 @@ def mapControl(window):
 	curses.use_default_colors()
 	window.keypad(True)
 
-	playerY = gamedata.playerY
-	playerX = gamedata.playerX
-
 	#Draw map objects
-	gamedata.drawmap(window)	
+	drawmap(window)	
 
 	#player movement	
 	while True:
@@ -27,12 +54,13 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY - 1, playerX, u'o')
 					playerY = playerY - 1
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY - 1, playerX):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY - 1, playerX, 'o')
 						playerY = playerY - 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -40,12 +68,13 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY + 1, playerX, u'o')
 					playerY = playerY + 1 
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY + 1, playerX):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY + 1, playerX, 'o')
 						playerY = playerY + 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -53,12 +82,13 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX - 1, u'o')
 					playerX = playerX - 1     
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY, playerX - 1):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX - 1, 'o')
 						playerX = playerX - 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else:
 					pass
 			if keypress == ord('d'):
@@ -66,31 +96,21 @@ def mapControl(window):
 					window.addch(playerY, playerX, ' ')
 					window.addstr(playerY, playerX + 1, u'o') 
 					playerX = playerX + 1   
-				for i in gamedata.mapObjList:
+				for i in mapObjList:
 					if i.pos == (playerY, playerX + 1):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX + 1, 'o')
 						playerX = playerX + 1
 						eval(i.function)	
+						mapObjList.remove(i)
 				else:
 					pass
 		except(curses.error, ValueError):
 			pass
 
-def menuControl(window):
-
-	#Set Curses settings
-	curses.noecho()
-	curses.cbreak()
-	curses.curs_set(False)  
-	curses.use_default_colors()
-	window.keypad(True)
-
-	#TODO: base menu system to build upon
-
 def main(masterWindow):
-
 	#Setup screens
+	loadGame()
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
 	mapWindow = curses.newwin(
