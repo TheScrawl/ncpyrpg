@@ -60,6 +60,7 @@ def mapControl(window):
 						window.addstr(playerY - 1, playerX, 'o')
 						playerY = playerY - 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -73,6 +74,7 @@ def mapControl(window):
 						window.addstr(playerY + 1, playerX, 'o')
 						playerY = playerY + 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -86,6 +88,7 @@ def mapControl(window):
 						window.addstr(playerY, playerX - 1, 'o')
 						playerX = playerX - 1
 						eval(i.function)
+						mapObjList.remove(i)
 				else:
 					pass
 			if keypress == ord('d'):
@@ -99,6 +102,7 @@ def mapControl(window):
 						window.addstr(playerY, playerX + 1, 'o')
 						playerX = playerX + 1
 						eval(i.function)	
+						mapObjList.remove(i)
 				else:
 					pass
 		except(curses.error, ValueError):
