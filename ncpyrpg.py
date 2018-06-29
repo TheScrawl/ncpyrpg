@@ -60,8 +60,9 @@ def mapControl(window, menuWindow):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY - 1, playerX, 'o')
 						playerY = playerY - 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
+							i.function.remove(x)
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -74,8 +75,9 @@ def mapControl(window, menuWindow):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY + 1, playerX, 'o')
 						playerY = playerY + 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)
+							i.function.remove(x)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -88,8 +90,9 @@ def mapControl(window, menuWindow):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX - 1, 'o')
 						playerX = playerX - 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
+							i.function.remove(x)
 				else:
 					pass
 			if keypress == ord('d'):
@@ -102,8 +105,9 @@ def mapControl(window, menuWindow):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX + 1, 'o')
 						playerX = playerX + 1
-						eval(i.function)	
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
+							i.function.remove(x)
 				else:
 					pass
 		except(curses.error, ValueError):
@@ -121,7 +125,11 @@ def main(masterWindow):
 		0,
 		0)	
 
-	menuWindow = curses.newwin(10, 10, gameWindowYSize, 0)
+	menuWindow = curses.newwin(
+		int(math.ceil(maxHeight - gameWindowYSize)), #Line Count
+		int(math.ceil(maxWidth)), #Column Count
+		int(math.ceil(gameWindowYSize)), #Start Y
+		0) #Start X	
 
 	#Main while loop
 	while True:
