@@ -44,9 +44,10 @@ def mapControl(window, menuWindow):
 
 	#Draw map objects
 	drawmap(window)	
-
 	#player movement	
 	while True:
+		menuWindow.refresh()
+		window.refresh()
 		keypress = window.getch()
 		try:
 			if keypress == ord('w'):
@@ -113,24 +114,19 @@ def main(masterWindow):
 	loadGame()
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
+
 	mapWindow = curses.newwin(
 		gameWindowYSize,
 		gameWindowXSize,
 		0,
 		0)	
 
-	menuWindow = curses.newwin(
-		int(math.ceil(maxHeight - gameWindowYSize)), #Line Count
-		int(math.ceil(maxWidth)), #Column Count
-		int(math.ceil(gameWindowYSize)), #Start Y
-		0) #Start X	
+	menuWindow = curses.newwin(10, 10, gameWindowYSize, 0)
 
 	#Main while loop
 	while True:
 		mapWindow.box()
 		menuWindow.box()
-		menuWindow.refresh()
-		mapWindow.refresh()
 		mapControl(mapWindow, menuWindow)
 
 wrapper(main)
