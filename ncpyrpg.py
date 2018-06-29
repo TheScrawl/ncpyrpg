@@ -32,7 +32,7 @@ def loadGame():
 	with open('functionfile', 'rb') as f:
 		drawmap = pickle.load(f)	
 			
-def mapControl(window):
+def mapControl(window, menuWindow):
 	global playerX
 	global playerY	
 	#Set Curses settings
@@ -114,14 +114,15 @@ def main(masterWindow):
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
 	mapWindow = curses.newwin(
-		int(math.ceil(maxHeight / 2)), #Line count 
-		int(math.ceil(maxWidth)), #Column Count
-		0, #Start Y 
-		0) #Start X
+		gameWindowYSize,
+		gameWindowXSize,
+		0,
+		0)	
+
 	menuWindow = curses.newwin(
-		int(math.ceil(maxHeight / 2)), #Line Count
+		int(math.ceil(maxHeight - gameWindowYSize)), #Line Count
 		int(math.ceil(maxWidth)), #Column Count
-		int(math.ceil(maxHeight / 2)), #Start Y
+		int(math.ceil(gameWindowYSize)), #Start Y
 		0) #Start X	
 
 	#Main while loop
@@ -130,6 +131,6 @@ def main(masterWindow):
 		menuWindow.box()
 		menuWindow.refresh()
 		mapWindow.refresh()
-		mapControl(mapWindow)
+		mapControl(mapWindow, menuWindow)
 
 wrapper(main)
