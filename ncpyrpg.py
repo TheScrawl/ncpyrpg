@@ -31,7 +31,20 @@ def loadGame():
 		globals().update(varDict)
 	with open('functionfile', 'rb') as f:
 		drawmap = pickle.load(f)	
-			
+		
+menuPos = 1
+menuHistory = [' ']
+
+def menuOut(string, window):
+	global menuPos
+	global menuHistory
+	window.addstr(1, 1, ' '*len(menuHistory[-1]))
+	window.addstr(1, 1, string)
+	menuPos = menuPos + 1
+	for i in menuHistory:
+		window.addstr(menuPos,1, i)
+	menuHistory.append(string)
+	
 def mapControl(window, menuWindow):
 	global playerX
 	global playerY	
@@ -53,7 +66,7 @@ def mapControl(window, menuWindow):
 			if keypress == ord('w'):
 				if chr(window.inch(playerY - 1, playerX)) == ' ':
 					window.addch(playerY, playerX, ' ')
-					window.addstr(playerY - 1, playerX, u'o')
+					window.addstr(playerY - 1, playerX, 'o')
 					playerY = playerY - 1
 				for i in mapObjList:
 					if i.pos == (playerY - 1, playerX):
@@ -62,12 +75,13 @@ def mapControl(window, menuWindow):
 						playerY = playerY - 1
 						for x in i.function:
 							eval(x)	
+						break
 				else: 
 					pass
 			if keypress == ord('s'):
 				if chr(window.inch(playerY + 1, playerX)) == ' ':
 					window.addch(playerY, playerX, ' ')
-					window.addstr(playerY + 1, playerX, u'o')
+					window.addstr(playerY + 1, playerX, 'o')
 					playerY = playerY + 1 
 				for i in mapObjList:
 					if i.pos == (playerY + 1, playerX):
@@ -76,12 +90,13 @@ def mapControl(window, menuWindow):
 						playerY = playerY + 1
 						for x in i.function:
 							eval(x)
+						break
 				else:
 					pass
 			if keypress == ord('a'):
 				if chr(window.inch(playerY, playerX - 1)) == ' ':
 					window.addch(playerY, playerX, ' ')
-					window.addstr(playerY, playerX - 1, u'o')
+					window.addstr(playerY, playerX - 1, 'o')
 					playerX = playerX - 1     
 				for i in mapObjList:
 					if i.pos == (playerY, playerX - 1):
@@ -89,13 +104,14 @@ def mapControl(window, menuWindow):
 						window.addstr(playerY, playerX - 1, 'o')
 						playerX = playerX - 1
 						for x in i.function:
-							eval(x)	
+							eval(x)
+						break	
 				else:
 					pass
 			if keypress == ord('d'):
 				if chr(window.inch(playerY, playerX + 1)) == ' ':
 					window.addch(playerY, playerX, ' ')
-					window.addstr(playerY, playerX + 1, u'o') 
+					window.addstr(playerY, playerX + 1, 'o') 
 					playerX = playerX + 1   
 				for i in mapObjList:
 					if i.pos == (playerY, playerX + 1):
@@ -104,6 +120,7 @@ def mapControl(window, menuWindow):
 						playerX = playerX + 1
 						for x in i.function:
 							eval(x)	
+						break
 				else:
 					pass
 		except(curses.error, ValueError):

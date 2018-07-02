@@ -30,8 +30,23 @@ gameWindowYSize = 28
 
 # Objects (char, y, x, function)
 
-#button = mapObj(['x'], 6, 6, 'window.addch(7, 6, " ")')
-button = mapObj(['x'], 5, 5, ['menuWindow.addstr(1,1, "button pressed")', 'window.addch(7, 6, " ")', ])
+button = mapObj(
+	['x'],
+	5, 
+	5, 
+	[
+	'menuOut("button pressed", menuWindow)',
+	'window.addch(7, 6, " ")', 
+	])
+
+button2 = mapObj(
+	['x'],
+	5, 
+	6, 
+	[
+	'menuOut("button2 pressed", menuWindow)'
+	])
+
 maze = ['#####################################',
 '#                                   #',
 '# ################  ############### #', 
@@ -64,9 +79,10 @@ maze = ['#####################################',
 def drawmap(window):
 	drawArray(1, 1, window, maze)
 	drawArray(button.posY, button.posX, window, button.char)
+	drawArray(button2.posY, button2.posX, window, button2.char)
 	
 #You need to put all of the variables you want in the game into this list
-varList = ['mapObjList', 'gameWindowXSize', 'gameWindowYSize',  'playerY', 'playerX', 'maze', 'button']
+varList = ['mapObjList', 'gameWindowXSize', 'gameWindowYSize',  'playerY', 'playerX', 'maze', 'button', 'button2']
 
 #Probably dont mess with this either
 varDict = dict([i, eval(i)] for i in varList)
