@@ -5,6 +5,8 @@ We will see how far I actually get this time.
 
 ## What does it do so far?
 Newest to oldest changes
+* allows output to the menu window from mapObjects
+* user can create mapObjects, interactive characters that do things when stepped on
 * lets a game designer to generate a game map in gamedata.py
 * takes arrays and draws objects at given coordinates
 * allows a player to move while colliding with objects that they shouldnt be able to move through
@@ -21,10 +23,7 @@ Newest to oldest changes
 
 ## Started
 * Add interactable objects in the world map (eg chests, monsters)
- 
-   * So far have a sort of button thing working, though it could theoretically do more
-   * its a bit hacky, might redo once I figure out a better way of doing it
-   * probably needs optimizing and whatnot
+    * mostly working, any futher changes/additions will need a more fleshed out menu system
 
 ## Known issues (i.e cant be bothered trying to fix please dont ask)
 * Lenny face ascii art doesnt work due to how the characters are handled. Not sure how to fix
