@@ -32,7 +32,7 @@ def loadGame():
 	with open('functionfile', 'rb') as f:
 		drawmap = pickle.load(f)	
 			
-def mapControl(window):
+def mapControl(window, menuWindow):
 	global playerX
 	global playerY	
 	#Set Curses settings
@@ -44,9 +44,10 @@ def mapControl(window):
 
 	#Draw map objects
 	drawmap(window)	
-
 	#player movement	
 	while True:
+		menuWindow.refresh()
+		window.refresh()
 		keypress = window.getch()
 		try:
 			if keypress == ord('w'):
@@ -59,8 +60,8 @@ def mapControl(window):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY - 1, playerX, 'o')
 						playerY = playerY - 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -73,8 +74,8 @@ def mapControl(window):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY + 1, playerX, 'o')
 						playerY = playerY + 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -87,8 +88,8 @@ def mapControl(window):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX - 1, 'o')
 						playerX = playerX - 1
-						eval(i.function)
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
 				else:
 					pass
 			if keypress == ord('d'):
@@ -101,8 +102,8 @@ def mapControl(window):
 						window.addch(playerY, playerX, ' ')
 						window.addstr(playerY, playerX + 1, 'o')
 						playerX = playerX + 1
-						eval(i.function)	
-						mapObjList.remove(i)
+						for x in i.function:
+							eval(x)	
 				else:
 					pass
 		except(curses.error, ValueError):
@@ -113,23 +114,23 @@ def main(masterWindow):
 	loadGame()
 	stdscr = curses.initscr()
 	maxHeight, maxWidth = stdscr.getmaxyx()
+
 	mapWindow = curses.newwin(
-		int(math.ceil(maxHeight / 2)), #Line count 
-		int(math.ceil(maxWidth)), #Column Count
-		0, #Start Y 
-		0) #Start X
+		gameWindowYSize,
+		gameWindowXSize,
+		0,
+		0)	
+
 	menuWindow = curses.newwin(
-		int(math.ceil(maxHeight / 2)), #Line Count
+		int(math.ceil(maxHeight - gameWindowYSize)), #Line Count
 		int(math.ceil(maxWidth)), #Column Count
-		int(math.ceil(maxHeight / 2)), #Start Y
+		int(math.ceil(gameWindowYSize)), #Start Y
 		0) #Start X	
 
 	#Main while loop
 	while True:
 		mapWindow.box()
 		menuWindow.box()
-		menuWindow.refresh()
-		mapWindow.refresh()
-		mapControl(mapWindow)
+		mapControl(mapWindow, menuWindow)
 
 wrapper(main)
