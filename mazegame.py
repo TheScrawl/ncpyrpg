@@ -31,7 +31,7 @@ gameWindowYSize = 28
 # Objects (char, y, x, function)
 
 #button = mapObj(['x'], 6, 6, 'window.addch(7, 6, " ")')
-button = mapObj(['x'], 5, 5, ['window.addch(7, 6, "x")', 'menuWindow.addstr(1,1, "button pressed")'])
+button = mapObj(['x'], 5, 5, ['menuWindow.addstr(1,1, "button pressed")', 'window.addch(7, 6, " ")', ])
 maze = ['#####################################',
 '#                                   #',
 '# ################  ############### #', 

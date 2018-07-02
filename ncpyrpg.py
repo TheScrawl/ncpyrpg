@@ -62,7 +62,6 @@ def mapControl(window, menuWindow):
 						playerY = playerY - 1
 						for x in i.function:
 							eval(x)	
-							i.function.remove(x)
 				else: 
 					pass
 			if keypress == ord('s'):
@@ -77,7 +76,6 @@ def mapControl(window, menuWindow):
 						playerY = playerY + 1
 						for x in i.function:
 							eval(x)
-							i.function.remove(x)
 				else:
 					pass
 			if keypress == ord('a'):
@@ -92,7 +90,6 @@ def mapControl(window, menuWindow):
 						playerX = playerX - 1
 						for x in i.function:
 							eval(x)	
-							i.function.remove(x)
 				else:
 					pass
 			if keypress == ord('d'):
@@ -107,7 +104,6 @@ def mapControl(window, menuWindow):
 						playerX = playerX + 1
 						for x in i.function:
 							eval(x)	
-							i.function.remove(x)
 				else:
 					pass
 		except(curses.error, ValueError):
