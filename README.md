@@ -11,6 +11,9 @@ Newest to oldest changes
 * takes arrays and draws objects at given coordinates
 * allows a player to move while colliding with objects that they shouldnt be able to move through
 
+## How do I use it?
+See the [Wiki](https://github.com/TheScrawl/ncpyrpg/wiki)
+
 ## Todos
 * Sort out how im going to do the menu system (probably some sort of tab system)
 * Add maps/rooms that link up
@@ -20,6 +23,7 @@ Newest to oldest changes
 * NPC system
 * Shop system
 * Quest System
+* Simplify the game making system
 
 ## Started
 * Add interactable objects in the world map (eg chests, monsters)
