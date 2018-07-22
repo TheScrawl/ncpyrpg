@@ -11,6 +11,12 @@ Newest to oldest changes
 * takes arrays and draws objects at given coordinates
 * allows a player to move while colliding with objects that they shouldnt be able to move through
 
+## Dependancies
+You should install the following with pip:
+```dill```
+
+You will also need to be running a linux distribution with Python3 installed
+
 ## How do I use it?
 See the [Wiki](https://github.com/TheScrawl/ncpyrpg/wiki)
 
