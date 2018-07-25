@@ -36,7 +36,8 @@ button = mapObj(
 	5, 
 	[
 	'menuOut("button pressed", menuWindow)',
-	'window.addch(7, 6, " ")', 
+	'window.addch(7, 6, "F")', 
+	'menuOut("Door opened", menuWindow)',
 	])
 
 button2 = mapObj(
@@ -44,6 +45,7 @@ button2 = mapObj(
 	5, 
 	6, 
 	[
+        'spawn(badguy, window, 10, 10)',
 	'menuOut("button2 pressed", menuWindow)'
 	])
 
@@ -77,7 +79,7 @@ maze = ['#####################################',
 
 ## USER MAP - put in all of the objects you want to draw and their locations
 def drawmap(window):
-	drawArray(1, 1, window, maze)
+	#drawArray(1, 1, window, maze)
 	drawArray(button.posY, button.posX, window, button.char)
 	drawArray(button2.posY, button2.posX, window, button2.char)
 	
