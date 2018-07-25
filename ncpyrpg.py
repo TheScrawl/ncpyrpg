@@ -15,7 +15,6 @@ class mapObj(object):
     mapObjList.append(self)
 
 class mapEntity(object):
-
     def __init__(self, movepath, body, speed, contactFunctions):
         self.movepath = movepath
         self.body = body
@@ -52,47 +51,6 @@ badguy = mapEntity(
         0.1,
         ['exit(0)']
         )
-
-
-class mapEntity(object):
-
-    def __init__(self, movepath, body, speed, contactFunctions):
-        self.movepath = movepath
-        self.body = body
-        self.speed = speed
-        self.contactFunctions = contactFunctions
-    
-def spawn(entity, window, xPos, yPos):
-        window.addstr(yPos, xPos, entity.body)
-        for i in entity.movepath:
-            if i[0] == 'up':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
-                    yPos = yPos + 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'down':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
-                    yPos = yPos - 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'left':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
-                    xPos = xPos - 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'right':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
-                    xPos = xPos + 1
-                    window.addstr(yPos, xPos, entity.body)
-
-badguy = mapEntity(
-        [('up', 3), ('left', 3), ('down', 3)],
-        u'卍',
-        0.1,
-        ['exit(0)']
-        )
-
 
 def drawArray(y, x, window, array): 
   for i in array: 
