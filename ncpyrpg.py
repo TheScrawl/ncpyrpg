@@ -48,7 +48,6 @@ def menuOut(string, window):
     menuHistory.append(string)
 
 class mapEntity(object):
-
     def __init__(self, movepath, body, speed, contactFunctions):
         self.movepath = movepath
         self.body = body
@@ -79,13 +78,39 @@ def spawn(entity, window, xPos, yPos, loops):
                         window.addstr(yPos, xPos, entity.body)
                         window.refresh()
                     #menuOut('entity moved ' + str(i[0]), window
-
 badguy = mapEntity(
         [('up', 3), ('left', 3), ('down', 3), ('right', 3)],
         u'卍',
         1,
         ['exit(0)']
         )
+
+drawmap = None
+playerX = None
+playerY = None
+
+def loadGame():
+	global drawmap
+	global playerX
+	global playerY
+	with open('gamefile', 'rb') as f:
+		varDict = pickle.load(f)
+		globals().update(varDict)
+	with open('functionfile', 'rb') as f:
+		drawmap = pickle.load(f)	
+		
+menuPos = 1
+menuHistory = [' ']
+
+def menuOut(string, window):
+	global menuPos
+	global menuHistory
+	window.addstr(1, 1, ' '*len(menuHistory[-1]))
+	window.addstr(1, 1, string)
+	menuPos = menuPos + 1
+	for i in menuHistory:
+		window.addstr(menuPos,1, i)
+	menuHistory.append(string)
 	
 def mapControl(window, menuWindow):
     global playerX
