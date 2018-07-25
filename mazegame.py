@@ -45,7 +45,7 @@ button2 = mapObj(
 	5, 
 	6, 
 	[
-        'spawn(badguy, window, 10, 10)',
+	'(threading.Thread(target=spawn, args=(badguy, window, 10, 10, 100))).start()',
 	'menuOut("button2 pressed", menuWindow)'
 	])
 
