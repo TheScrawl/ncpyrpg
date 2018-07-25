@@ -33,16 +33,19 @@ def loadGame():
         drawmap = pickle.load(f)	
 		
 menuPos = 1
-menuHistory = [' ']
+menuHistory = []
 
 def menuOut(string, window):
     global menuPos
     global menuHistory
-    window.addstr(1, 1, ' '*len(menuHistory[-1]))
-    window.addstr(1, 1, string)
-    menuPos = menuPos + 1
-    for i in menuHistory:
-        window.addstr(menuPos,1, i)
+    try:
+        window.addstr(1, 1, ' '*len(menuHistory[-1]))
+        window.addstr(1, 1, string)
+        menuPos = menuPos + 1
+        for i in menuHistory:
+            window.addstr(menuPos,1, i)
+    except IndexError:
+        window.addstr(1, 1, string)
     menuHistory.append(string)
 	
 def mapControl(window, menuWindow):
