@@ -24,26 +24,17 @@ class mapEntity(object):
 def spawn(entity, window, xPos, yPos):
         window.addstr(yPos, xPos, entity.body)
         for i in entity.movepath:
-            if i[0] == 'up':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
+            for x in range(i[1]):
+                window.addstr(yPos, xPos, ' ')
+                if i[0] == 'up': 
                     yPos = yPos + 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'down':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
+                if i[0] == 'down': 
                     yPos = yPos - 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'left':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
+                if i[0] == 'left': 
                     xPos = xPos - 1
-                    window.addstr(yPos, xPos, entity.body)
-            if i[0] == 'right':
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
+                if i[0] == 'right': 
                     xPos = xPos + 1
-                    window.addstr(yPos, xPos, entity.body)
+                window.addstr(yPos, xPos, entity.body)
 
 badguy = mapEntity(
         [('up', 3), ('left', 3), ('down', 3)],
