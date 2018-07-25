@@ -54,33 +54,27 @@ class mapEntity(object):
         self.speed = speed
         self.contactFunctions = contactFunctions
     
-def spawn(entity, window, xPos, yPos, loops):
-        window.addstr(yPos, xPos, entity.body)
-        for l in range(loops):
-            for i in entity.movepath:
-                for x in range(i[1]):
-                    window.addstr(yPos, xPos, ' ')
-                    if i[0] == 'up': 
-                        yPos = yPos + 1
-                        window.addstr(yPos, xPos, entity.body)
-                    if i[0] == 'down': 
-                        yPos = yPos - 1
-                        window.addstr(yPos, xPos, entity.body)
-                    if i[0] == 'left': 
-                        xPos = xPos - 1
-                        window.addstr(yPos, xPos, entity.body)
-                    if i[0] == 'right': 
-                        xPos = xPos + 1
-                        window.addstr(yPos, xPos, entity.body)
-                    time.sleep(0.1)
-                    window.refresh()
+    def spawn(self, window, xPos, yPos, loops):
+            window.addstr(yPos, xPos, self.body)
+            for l in range(loops):
+                for i in self.movepath:
+                    for x in range(i[1]):
+                        window.addstr(yPos, xPos, ' ')
+                        if i[0] == 'up': 
+                            yPos = yPos + 1
+                            window.addstr(yPos, xPos, self.body)
+                        if i[0] == 'down': 
+                            yPos = yPos - 1
+                            window.addstr(yPos, xPos, self.body)
+                        if i[0] == 'left': 
+                            xPos = xPos - 1
+                            window.addstr(yPos, xPos, self.body)
+                        if i[0] == 'right': 
+                            xPos = xPos + 1
+                            window.addstr(yPos, xPos, self.body)
+                        time.sleep(0.1)
+                        window.refresh()
                     #menuOut('entity moved ' + str(i[0]), window
-badguy = mapEntity(
-        [('up', 3), ('left', 3), ('down', 3), ('right', 3)],
-        '#',
-        1,
-        ['exit(0)']
-        )
 
 drawmap = None
 playerX = None
