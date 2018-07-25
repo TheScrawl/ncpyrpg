@@ -60,27 +60,24 @@ def spawn(entity, window, xPos, yPos, loops):
             for i in entity.movepath:
                 for x in range(i[1]):
                     window.addstr(yPos, xPos, ' ')
-                    time.sleep(0.1)
                     if i[0] == 'up': 
                         yPos = yPos + 1
                         window.addstr(yPos, xPos, entity.body)
-                        window.refresh()
                     if i[0] == 'down': 
                         yPos = yPos - 1
                         window.addstr(yPos, xPos, entity.body)
-                        window.refresh()
                     if i[0] == 'left': 
                         xPos = xPos - 1
                         window.addstr(yPos, xPos, entity.body)
-                        window.refresh()
                     if i[0] == 'right': 
                         xPos = xPos + 1
                         window.addstr(yPos, xPos, entity.body)
-                        window.refresh()
+                    time.sleep(0.1)
+                    window.refresh()
                     #menuOut('entity moved ' + str(i[0]), window
 badguy = mapEntity(
         [('up', 3), ('left', 3), ('down', 3), ('right', 3)],
-        u'卍',
+        '#',
         1,
         ['exit(0)']
         )
