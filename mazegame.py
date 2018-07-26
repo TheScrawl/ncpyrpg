@@ -21,35 +21,37 @@ class mapObj(object):
         mapObjList.append(self)
 
 class mapEntity(object):
-    global mapEntityList
-    def __init__(self, movepath, body, speed, contactFunctions):
+    def __init__(self, movepath, body, speed, posY, posX, contactFunctions):
         self.movepath = movepath
         self.body = body
         self.speed = speed
+        self.posY = posY
+        self.posX = posX
         self.contactFunctions = contactFunctions
-        mapEntityList.append(self)
-    
-    def spawn(self, window, xPos, yPos, loops):
-            window.addstr(yPos, xPos, self.body)
+
+    def spawn(self, window, loops):
+            window.addstr(self.posY, self.posX, self.body)
             for l in range(loops):
                 for i in self.movepath:
                     for x in range(i[1]):
-                        window.addstr(yPos, xPos, ' ')
-                        if i[0] == 'up': 
-                            yPos = yPos + 1
-                            window.addstr(yPos, xPos, self.body)
-                        if i[0] == 'down': 
-                            yPos = yPos - 1
-                            window.addstr(yPos, xPos, self.body)
-                        if i[0] == 'left': 
-                            xPos = xPos - 1
-                            window.addstr(yPos, xPos, self.body)
-                        if i[0] == 'right': 
-                            xPos = xPos + 1
-                            window.addstr(yPos, xPos, self.body)
+                        window.addstr(self.posY, self.posX, ' ')
+                        if i[0] == 'up':
+                            self.posY = self.posY + 1
+                            window.addstr(self.posY, self.posX, self.body)
+                        if i[0] == 'down':
+                            self.posY = self.posY - 1
+                            window.addstr(self.posY, self.posX, self.body)
+                        if i[0] == 'left':
+                            self.posX = self.posX - 1
+                            window.addstr(self.posY, self.posX, self.body)
+                        if i[0] == 'right':
+                            self.posX = self.posX + 1
+                            window.addstr(self.posY, self.posX, self.body)
                         time.sleep(0.1)
                         window.refresh()
                     #menuOut('entity moved ' + str(i[0]), window
+
+
 
 
 
@@ -65,6 +67,8 @@ badguy = mapEntity(
         [('up', 3), ('left', 3), ('down', 3), ('right', 3)],
         '#',
         1,
+        10,
+        10,
         ['exit(0)']
         )
 
@@ -95,7 +99,7 @@ button2 = mapObj(
 	5, 
 	6, 
 	[
-	'(threading.Thread(target=badguy.spawn, args=(window, 10, 10, 100))).start()',
+	'(threading.Thread(target=badguy.spawn, args=(window, 100))).start()',
 	'menuOut("button2 pressed", menuWindow)'
 	])
 
