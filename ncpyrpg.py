@@ -113,6 +113,7 @@ def mapControl(window, menuWindow):
     curses.use_default_colors()
     window.keypad(True)
 
+
     #Draw map objects
     drawmap(window)	
     #player movement	
@@ -121,75 +122,65 @@ def mapControl(window, menuWindow):
         window.refresh()
         keypress = window.getch()
         try:
+
+            window.addch(playerY, playerX, ' ')
+
             if keypress == ord('w'):
                 if chr(window.inch(playerY - 1, playerX)) == ' ':
-                    window.addch(playerY, playerX, ' ')
-                    window.addstr(playerY - 1, playerX, 'o')
-                    playerY = playerY - 1
-                elif chr(window.inch(playerY - 1, playerX)) != ' ':
-                     for i in mapObjList:
-                        if i.pos == (playerY - 1, playerX):
-                            window.addch(playerY, playerX, ' ')
-                            window.addstr(playerY - 1, playerX, 'o')
-                            playerY = playerY - 1
-                            for x in i.function:
-                                eval(x)	
-                                mapObjList.remove(i)
-                                break
-                        else: 
-                            pass
+                    pass
+                if i.pos == (playerY - 1, playerX):
+                    for i in mapObjList:
+                        for x in i.function:
+                             eval(x)
+                             mapObjList.remove(i)
+                             break
+                                 
+                else: 
+                    keypress = None
+                playerY = playerY - 1
+                
             if keypress == ord('s'):
                 if chr(window.inch(playerY + 1, playerX)) == ' ':
-                    window.addch(playerY, playerX, ' ')
-                    window.addstr(playerY + 1, playerX, 'o')
-                    playerY = playerY + 1 
-
-                elif chr(window.inch(playerY + 1, playerX)) != ' ':
-                    for i in mapObjList:
-                        if i.pos == (playerY + 1, playerX):
-                            window.addch(playerY, playerX, ' ')
-                            window.addstr(playerY + 1, playerX, 'o')
-                            playerY = playerY + 1
-                            for x in i.function:
-                                eval(x)
-                                mapObjList.remove(i)
+                    pass
+                for i in mapObjList:
+                    if i.pos == (playerY + 1, playerX):
+                        for x in i.function:
+                            eval(x)	
+                            mapObjList.remove(i)
                             break
-                        else:
-                            pass
+                else:
+                    keypress = None
+                playerY = playerY + 1 
+                        
             if keypress == ord('a'):
                 if chr(window.inch(playerY, playerX - 1)) == ' ':
-                    window.addch(playerY, playerX, ' ')
-                    window.addstr(playerY, playerX - 1, 'o')
-                    playerX = playerX - 1     
-                elif chr(window.inch(playerY, playerX - 1)) != ' ':
-                    for i in mapObjList:
-                        if i.pos == (playerY, playerX - 1):
-                            window.addch(playerY, playerX, ' ')
-                            window.addstr(playerY, playerX - 1, 'o')
-                            playerX = playerX - 1
-                            for x in i.function:
-                                eval(x)
-                                mapObjList.remove(i)
-                        break	
-                else:
                     pass
-            if keypress == ord('d'):
-                if chr(window.inch(playerY, playerX + 1)) == ' ':
-                    window.addch(playerY, playerX, ' ')
-                    window.addstr(playerY, playerX + 1, 'o') 
-                    playerX = playerX + 1   
-                elif chr(window.inch(playerY, playerX + 1)) != ' ':
-                    for i in mapObjList:
-                        if i.pos == (playerY, playerX + 1):
-                            window.addch(playerY, playerX, ' ')
-                            window.addstr(playerY, playerX + 1, 'o')
-                            playerX = playerX + 1
-                            for x in i.function:
-                                eval(x)	
-                                mapObjList.remove(i)
+                for i in mapObjList:
+                    if i.pos == (playerY, playerX - 1):
+                        for x in i.function:
+                            eval(x)	
+                            mapObjList.remove(i)
                             break
                 else:
+                   keypress = None 
+                playerX = playerX - 1     
+
+            if keypress == ord('d'):
+                if chr(window.inch(playerY, playerX + 1)) == ' ':
                     pass
+                for i in mapObjList:
+                    if i.pos == (playerY, playerX + 1):
+                        for x in i.function:
+                            eval(x)	
+                            mapObjList.remove(i)
+                            break
+                else:
+                    keypress = None 
+                playerX = playerX + 1   
+            
+
+            window.addstr(playerY, playerX, 'o')
+
         except(curses.error, ValueError):
             pass
 def main(masterWindow):
