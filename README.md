@@ -34,6 +34,8 @@ See the [Wiki](https://github.com/TheScrawl/ncpyrpg/wiki)
 ## Started
 * Add interactable objects in the world map (eg chests, monsters)
     * mostly working, any futher changes/additions will need a more fleshed out menu system
+* Add moving characters - entities - that are interactable when touched 
+   * figured out the generation and movement of entities, however they are not yet interactable
 
 ## Known issues (i.e cant be bothered trying to fix please dont ask)
 * Lenny face ascii art doesnt work due to how the characters are handled. Not sure how to fix
